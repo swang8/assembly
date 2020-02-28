@@ -17,7 +17,7 @@ cd NGS_assembly/Long_Reads/PacBio_Data
 ```
 curl -L -o pacbio.fastq http://gembox.cbcb.umd.edu/mhap/raw/ecoli_p6_25x.filtered.fastq
 
-head -n 4 pacbio.fastq
+head -n 4 pacbio.fastq | more
 ```
 
 ## Prepare for submitting the assembly job
