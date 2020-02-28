@@ -1,9 +1,10 @@
 # Assembly tutorial
 HPRC short course serial
+
 Shichen Wang
 
 
-## setup
+## Setup
 ```
 echo $SCRATCH
 cd $SCRATCH
@@ -12,14 +13,14 @@ mkdir -p NGS_assembly/Long_Reads/PacBio_Data
 cd NGS_assembly/Long_Reads/PacBio_Data
 ```
 
-### get the data
+### Get the data
 ```
 curl -L -o pacbio.fastq http://gembox.cbcb.umd.edu/mhap/raw/ecoli_p6_25x.filtered.fastq
 
-head -n 16 pacbio.fastq
+head -n 4 pacbio.fastq
 ```
 
-## prepare for submitting the assembly job
+## Prepare for submitting the assembly job
 
 Wiki page for running Canu on TAMU HPRC Ada System:
 [https://hprc.tamu.edu/wiki/Ada:NGS:Genome_Assembly#Canu](https://hprc.tamu.edu/wiki/Ada:NGS:Genome_Assembly#Canu)
@@ -39,7 +40,7 @@ cd $SCRATCH/NGS_assembly/Long_Reads/PacBio_Assembly
 nano run_canu.bsub
 ```
 
-Copy and paste the following to the file:
+Copy and paste the following to the file `run_canu.bsub`, then save it:
 <pre>
 #BSUB -L /bin/bash
 #BSUB -J canu_run
@@ -56,5 +57,16 @@ module load Canu/1.7-intel-2017A-Perl-5.24.0
 out_dir=$SCRATCH/NGS_assembly/Long_Reads/PacBio_Assembly
 input_dir=$SCRATCH/NGS_assembly/Long_Reads/PacBio_Data
 
+date
+echo "start"
+
 canu -p Ecoli -d $out_dir genomeSize=4.8m -pacbio-raw $input_dir/pacbio.fastq useGrid=false
+
+date
+echo "finished!"
 </pre>
+
+### submit the job
+```
+bsub <run_canu.bsub
+```
