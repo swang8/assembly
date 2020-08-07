@@ -40,7 +40,7 @@ cd $SCRATCH/NGS_assembly/Long_Reads/PacBio_Assembly
 nano run_canu.bsub
 ```
 
-Copy and paste the following to the file `run_canu.bsub`, then save it:
+Copy and paste the following to the file `run_canu.bsub`, then save it `Ctrl-x`:
 <pre>
 #BSUB -L /bin/bash
 #BSUB -J canu_run
